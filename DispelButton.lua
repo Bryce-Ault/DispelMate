@@ -4,7 +4,7 @@ local _, ns = ...
 -- Create secure action button
 ---------------------------------------------------------------------------
 local btn = CreateFrame("Button", "DispelMateButton", UIParent, "SecureActionButtonTemplate")
-btn:SetSize(100, 70)
+btn:SetSize(73, 51)
 btn:SetPoint("TOP", UIParent, "TOP", -150, -180)
 btn:SetFrameStrata("HIGH")
 btn:SetMovable(true)
@@ -38,18 +38,22 @@ inner:SetColorTexture(0.15, 0.0, 0.2, 0.85)
 
 -- Debuff icon
 local debuffIcon = btn:CreateTexture(nil, "OVERLAY")
-debuffIcon:SetSize(24, 24)
+debuffIcon:SetSize(18, 18)
 debuffIcon:SetPoint("TOP", btn, "TOP", 0, -5)
 btn.debuffIcon = debuffIcon
 
 -- Label (target name)
-local label = btn:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+local label = btn:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+local labelFont, _, labelFlags = label:GetFont()
+label:SetFont(labelFont, 10, labelFlags)
 label:SetPoint("TOP", debuffIcon, "BOTTOM", 0, -2)
 label:SetTextColor(1, 0.85, 0.3)
 btn.label = label
 
 -- Status line (queue count)
-local status = btn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+local status = btn:CreateFontString(nil, "OVERLAY", "GameFontNormalTiny")
+local statusFont, _, statusFlags = status:GetFont()
+status:SetFont(statusFont, 7, statusFlags)
 status:SetPoint("BOTTOM", btn, "BOTTOM", 0, 4)
 status:SetTextColor(0.8, 0.8, 0.8)
 btn.status = status
