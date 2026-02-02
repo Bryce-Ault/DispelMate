@@ -10,9 +10,7 @@ local function StartScanTicker()
     if scanTicker then return end
     scanTicker = C_Timer.NewTicker(0.5, function()
         ns.ScanForDispellableUnits()
-        if not InCombatLockdown() then
-            ns.UpdateButton()
-        end
+        ns.UpdateButton()
     end)
 end
 
@@ -88,9 +86,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
             return
         end
         ns.ScanForDispellableUnits()
-        if not InCombatLockdown() then
-            ns.UpdateButton()
-        end
+        ns.UpdateButton()
 
     elseif event == "UNIT_AURA" then
         local now = GetTime()
@@ -98,9 +94,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
         auraThrottle = now
 
         ns.ScanForDispellableUnits()
-        if not InCombatLockdown() then
-            ns.UpdateButton()
-        end
+        ns.UpdateButton()
 
     elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
         local unit, _, spellId = ...
@@ -108,9 +102,7 @@ eventFrame:SetScript("OnEvent", function(self, event, ...)
             -- After our dispel cast, rescan quickly
             C_Timer.After(0.2, function()
                 ns.ScanForDispellableUnits()
-                if not InCombatLockdown() then
-                    ns.UpdateButton()
-                end
+                ns.UpdateButton()
             end)
         end
 

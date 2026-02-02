@@ -18,9 +18,10 @@ SlashCmdList["DISPELMATE"] = function(msg)
         end
 
         local playerName = UnitName("player")
+        local testIcon = "Interface\\Icons\\Spell_Shadow_CurseOfSargeras"
         ns.queue = {
-            { unitId = "player", name = playerName },
-            { unitId = "player", name = "FakeTarget" },
+            { unitId = "player", name = playerName, icon = testIcon },
+            { unitId = "player", name = "FakeTarget", icon = testIcon },
         }
         ns.UpdateButton()
         print("|cff00ff00DispelMate:|r Test mode – button shown with 2 dummy entries. Click or type |cfffff000/dm reset|r to hide.")
