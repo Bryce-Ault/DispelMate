@@ -1,0 +1,11 @@
+## Interface: 20505
+## Title: DispelMate
+## Notes: One-click dispelling for party and raid members. Shows a button when a nearby ally has a dispellable debuff.
+## Author: You
+## Version: 1.0.0
+
+DispelMate.lua
+DispelScanner.lua
+DispelButton.lua
+DispelEvents.lua
+SlashCommands.lua
