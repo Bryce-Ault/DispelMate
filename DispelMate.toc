@@ -1,4 +1,4 @@
-## Interface: 20505
+﻿## Interface: 20506
 ## Title: DispelMate
 ## Notes: One-click dispelling for party and raid members. Shows a button when a nearby ally has a dispellable debuff.
 ## Author: You
