@@ -80,15 +80,15 @@ function ns.UpdateButton()
 
     if #queue == 0 then
         ns.currentUnit = nil
-        if inCombat then
-            -- Can't hide the button, so make it fully transparent
-            btn.debuffIcon:Hide()
-            btn.label:SetText("")
-            btn.status:SetText("")
-            bg:SetAlpha(0)
-            border:SetAlpha(0)
-            inner:SetAlpha(0)
-        else
+        btn.debuffIcon:Hide()
+        btn.label:SetText("")
+        btn.status:SetText("")
+        bg:SetAlpha(0)
+        border:SetAlpha(0)
+        inner:SetAlpha(0)
+        -- Only actually hide the frame outside combat; inside combat the
+        -- button must stay in "shown" state (secure frame restriction).
+        if not inCombat then
             btn:Hide()
         end
         return
@@ -97,7 +97,7 @@ function ns.UpdateButton()
     local entry = queue[1]
     ns.currentUnit = entry.unitId
 
-    -- Restore visuals in case they were cleared
+    -- Alpha changes are allowed during combat lockdown.
     bg:SetAlpha(1)
     border:SetAlpha(1)
     inner:SetAlpha(1)
@@ -110,23 +110,16 @@ function ns.UpdateButton()
     end
 
     btn.label:SetText(entry.name)
+    btn.status:SetText(#queue > 1 and string.format("%d more afflicted", #queue - 1) or "")
 
-    if #queue > 1 then
-        btn.status:SetText(string.format("%d more afflicted", #queue - 1))
-    else
-        btn.status:SetText("")
-    end
-
+    -- SetAttribute and Show are restricted during combat.
+    -- Attributes set before combat persist and keep the button clickable.
     if not inCombat then
-        -- Build macro: target unit -> cast dispel -> retarget previous
-        local macro = string.format(
+        btn:SetAttribute("type1", "macro")
+        btn:SetAttribute("macrotext1", string.format(
             "/target %s\n/cast %s\n/targetlasttarget",
             entry.name, ns.decurseSpell
-        )
-
-        btn:SetAttribute("type1", "macro")
-        btn:SetAttribute("macrotext1", macro)
-
+        ))
         if not btn:IsShown() then
             btn:Show()
         end
